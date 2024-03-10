@@ -13,6 +13,7 @@ import useFetch from "./UseFetch";
 
 const AfterPressRelease = () => {
   const location = useLocation();
+  console.log("This is locatiojn state" + location.state.id);
   const pressElements = useFetch(
     `${import.meta.env.VITE_APP_API_ROOT}/press-releases?per_page=20`
   );
@@ -73,7 +74,7 @@ const AfterPressRelease = () => {
       <div className="relative w-full h-[500px] sm:h-[880px]">
         <div className="absolute inset-0 z-[-2]">
           <img
-            src={pressElements?.[location?.state?.id]?.imageUrl || def}
+            src={location?.state?.ele?.imageUrl || def}
             alt={`press bg`}
             className="object-cover w-full h-full"
           />
@@ -109,18 +110,13 @@ const AfterPressRelease = () => {
           <p className="text-[14px] sm:text-[18px] font-medium text-[#6D603F]">
             Title :{" "}
           </p>
-          <p>
-            {pressElements?.[location?.state?.id]?.title?.rendered ||
-              "Loading..."}{" "}
-          </p>
+          <p>{location?.state?.ele?.title?.rendered || "Loading..."} </p>
         </div>
 
         <div className="flex w-full items-center gap-3">
           <p
             dangerouslySetInnerHTML={{
-              __html:
-                pressElements?.[location?.state?.id]?.content?.rendered ||
-                "Loading...",
+              __html: location?.state?.ele?.content?.rendered || "Loading...",
             }}
           />
         </div>

@@ -36,7 +36,7 @@ const Press = () => {
   const handleAutoSwitch = () => {
     setCurrentIndex(
       (prevIndex) =>
-        (prevIndex + 1) % pressElements?.length || (prevIndex + 1) % 3
+        (prevIndex + 1) % pressElements?.length || (prevIndex + 1) % 2
     );
   };
 
@@ -63,7 +63,7 @@ const Press = () => {
       <div className="absolute inset-0 bg-black bg-opacity-40" />
       <div className="text-container absolute z-1 text-white w-full h-full flex flex-col justify-end items-end gap-3 p-6">
         <p
-          className={`text-[14px] ${
+          className={`line-clamp-3 text-[14px] ${
             window.innerWidth >= 640 ? "sm:text-[25px]" : ""
           } w-[70%] font-medium`}
           dangerouslySetInnerHTML={{ __html: element?.content?.rendered }}
@@ -74,7 +74,10 @@ const Press = () => {
           } rounded-lg ${
             window.innerWidth < 640 ? "w-[80%] h-[30px]" : "w-[35%] h-[50px]"
           }`}
-          onClick={() => navigate("/afterpress", { state: { id: index } })}
+          onClick={() => {
+            navigate("/afterpress", { state: { ele: element } });
+            console.log(index + "isidiasdsaj");
+          }}
         >
           Read more
         </button>
